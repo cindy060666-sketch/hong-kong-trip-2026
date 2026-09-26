@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#e85d75">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<title>香港 4天3夜｜旅行 App</title>
+<style>
+:root{
+  --bg:#fff8f5; --card:#ffffff; --text:#302c2c; --muted:#817777;
+  --accent:#e85d75; --accent2:#f3a65a; --line:#eee2df;
+  --shadow:0 8px 25px rgba(70,45,45,.08); --radius:20px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:linear-gradient(180deg,#fff8f5 0%,#fff 38%);color:var(--text);
+font-family:-apple-system,BlinkMacSystemFont,"PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif;
+line-height:1.6}
+button,a{font:inherit}
+a{text-decoration:none;color:inherit}
+.app{max-width:760px;margin:auto;padding-bottom:92px}
+.hero{padding:28px 20px 22px;background:
+radial-gradient(circle at 85% 10%,rgba(243,166,90,.28),transparent 28%),
+linear-gradient(135deg,#fff0f1,#fff8f5 55%,#fff);
+border-bottom:1px solid var(--line)}
+.eyebrow{font-size:12px;letter-spacing:.12em;color:var(--accent);font-weight:800}
+h1{font-size:29px;line-height:1.2;margin:7px 0}
+.subtitle{color:var(--muted);font-size:14px;margin:0}
+.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}
+.hero-stat{background:rgba(255,255,255,.78);border:1px solid rgba(232,93,117,.12);border-radius:16px;padding:11px 13px;min-height:72px}
+.hero-stat b{display:block;font-size:15px}.hero-stat span{font-size:12px;color:var(--muted)}
+.notice{margin:16px 20px 0;background:#fff1d9;border:1px solid #f6d8a6;border-radius:16px;padding:12px 14px;font-size:13px}
+.content{padding:0 20px}
+.section{padding-top:24px}
+.section-title{display:flex;justify-content:space-between;align-items:end;margin-bottom:12px}
+.section-title h2{font-size:21px;margin:0}.section-title small{color:var(--muted)}
+.day-card,.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;margin-bottom:14px}
+.day-head{padding:16px 17px;background:linear-gradient(135deg,#fff,#fff5f4)}
+.day-head .date{font-size:12px;color:var(--accent);font-weight:800}.day-head h3{margin:2px 0;font-size:18px}.day-head p{margin:2px 0;color:var(--muted);font-size:13px}
+.timeline{padding:8px 14px 12px}
+.item{display:grid;grid-template-columns:57px 1fr;gap:10px;padding:13px 2px;border-bottom:1px solid #f1e9e7}
+.item:last-child{border-bottom:0}
+.time{font-weight:800;color:var(--accent);font-size:13px;padding-top:2px}
+.item h4{margin:0 0 2px;font-size:15px}.item p{margin:0;color:var(--muted);font-size:13px}
+.tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+.tag{font-size:11px;padding:2px 7px;border-radius:99px;background:#f8eeee;color:#8b5b61}
+.map-btn{display:inline-flex;align-items:center;gap:5px;margin-top:8px;padding:8px 10px;background:#fff0f2;color:#c8445c;border-radius:10px;font-size:12px;font-weight:700}
+.card-pad{padding:17px}
+.info-row{padding:11px 0;border-bottom:1px solid var(--line);font-size:14px}
+.info-row:last-child{border-bottom:0}.label{color:var(--muted);font-size:12px;display:block}
+.route{display:flex;gap:10px;padding:12px 0;border-bottom:1px solid var(--line)}
+.route:last-child{border-bottom:0}.route-icon{width:34px;height:34px;border-radius:12px;background:#fff0f2;display:grid;place-items:center}
+.route b{font-size:14px}.route span{display:block;color:var(--muted);font-size:12px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.budget{background:linear-gradient(135deg,#fff,#fff5ed);border:1px solid #f1dfd1;border-radius:16px;padding:13px}
+.budget b{font-size:19px}.budget small{display:block;color:var(--muted)}
+.total{margin-top:10px;background:#2f2929;color:white;border-radius:18px;padding:17px}
+.total b{font-size:23px}.total span{display:block;color:#ddd;font-size:12px}
+.checklist{list-style:none;padding:0;margin:0}.checklist li{padding:10px 0;border-bottom:1px solid var(--line);display:flex;gap:9px;font-size:14px}
+.checklist li:last-child{border-bottom:0}.checklist input{accent-color:var(--accent);width:18px;height:18px;margin-top:2px}
+.bottom-nav{position:fixed;left:50%;bottom:0;transform:translateX(-50%);width:min(760px,100%);
+background:rgba(255,255,255,.94);backdrop-filter:blur(14px);border-top:1px solid var(--line);
+display:grid;grid-template-columns:repeat(5,1fr);padding:7px 8px calc(7px + env(safe-area-inset-bottom));z-index:20}
+.nav-btn{border:0;background:none;color:#8d8282;font-size:10px;padding:5px 2px;border-radius:12px;cursor:pointer}
+.nav-btn .ico{display:block;font-size:19px;line-height:1.1;margin-bottom:2px}.nav-btn.active{color:var(--accent);background:#fff0f2}
+.backtop{position:fixed;right:16px;bottom:90px;border:0;background:var(--accent);color:white;width:42px;height:42px;border-radius:50%;
+box-shadow:0 6px 16px rgba(232,93,117,.3);display:none}
+@media(min-width:600px){.hero{border-radius:0 0 28px 28px}.content{padding-left:28px;padding-right:28px}.hero{padding-left:28px;padding-right:28px}}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="hero" id="top">
+  <div class="eyebrow">HONG KONG · 2026.10.12 — 10.15</div>
+  <h1>🇭🇰 香港 4天3夜旅行 App</h1>
+  <p class="subtitle">斯涵＋怡婷｜第一次香港自由行｜尖沙咀住宿</p>
+  <div class="hero-grid">
+    <div class="hero-stat"><b>10/12 ✈️ 斯涵</b><span>台灣 10:50 → 香港 13:00</span></div>
+    <div class="hero-stat"><b>10/12 ✈️ 怡婷</b><span>台灣 11:10 → 香港 12:50</span></div>
+    <div class="hero-stat"><b>10/15 ✈️ 怡婷</b><span>香港 16:35 → 台灣</span></div>
+    <div class="hero-stat"><b>10/15 ✈️ 斯涵</b><span>香港 18:15 → 台灣</span></div>
+  </div>
+</header>
+
+<div class="notice">💡 本版主線已確認：10/13 海洋公園搭園內纜車；10/14 上環→中環→太平山；10/15 斯涵與怡婷依不同航班時間分流。</div>
+
+<main class="content">
+<section class="section" id="days">
+  <div class="section-title"><h2>📅 每日行程</h2><small>可直接照著走</small></div>
+
+  <article class="day-card">
+    <div class="day-head"><div class="date">10/12 MON · DAY 1</div><h3>✈️ 抵達香港 → 尖沙咀 → 廟街</h3><p>The ONE／廟街／大生生活超市</p></div>
+    <div class="timeline">
+      <div class="item"><div class="time">12:50–13:00</div><div><h4>✈️ 兩人抵達香港</h4><p>怡婷12:50、斯涵13:00。入境、領行李、洗手間、機場會合。</p></div></div>
+      <div class="item"><div class="time">14:15–15:15</div><div><h4>🚌 香港機場 → 尖沙咀</h4><p>A21 機場巴士；約50–60分鐘。預估 HK$34.6／人。</p><a class="map-btn" href="https://www.google.com/maps/dir/?api=1&origin=Hong+Kong+International+Airport&destination=Haiphong+Road+53-55%2C+Tsim+Sha+Tsui%2C+Hong+Kong&travelmode=transit">🗺️ 開啟導航</a></div></div>
+      <div class="item"><div class="time">15:15–16:00</div><div><h4>🏨 香港雅舍</h4><p>Check-in／放行李／休息。</p><a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=Joyce+House+53-55+Haiphong+Road+Hong+Kong">📍 香港雅舍</a></div></div>
+      <div class="item"><div class="time">16:00–18:00</div><div><h4>🛍️ The ONE</h4><p>從住宿步行前往；逛街約1–1.5小時。</p><a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=The+ONE+100+Nathan+Road+Hong+Kong">🗺️ The ONE</a></div></div>
+      <div class="item"><div class="time">18:00–19:00</div><div><h4>🍜 尖沙咀晚餐</h4><p>第一天不指定餐廳，依體力就近吃。</p></div></div>
+      <div class="item"><div class="time">19:00–21:00</div><div><h4>🌙 廟街夜市</h4><p>尖沙咀站 → 佐敦站，約1站；逛街＋小吃。</p><a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=Temple+Street+Night+Market+Hong+Kong">🗺️ 廟街</a></div></div>
+      <div class="item"><div class="time">21:00–22:00</div><div><h4>🛒 大生生活超市</h4><p>選擇當天動線最順的分店；主要買零食／伴手禮。</p><a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=%E5%A4%A7%E7%94%9F%E7%94%9F%E6%B4%BB%E8%B6%85%E5%B8%82+Hong+Kong">🗺️ 搜尋附近大生</a></div></div>
+      <div class="item"><div class="time">22:00–22:30</div><div><h4>🏨 回飯店休息</h4><p>第一天不熬夜，為海洋公園留體力。</p></div></div>
+    </div>
+  </article>
+
+  <article class="day-card">
+    <div class="day-head"><div class="date">10/13 TUE · DAY 2</div><h3>🎢 香港海洋公園</h3><p>整天玩｜園內登山纜車</p></div>
+    <div class="timeline">
+      <div class="item"><div class="time">08:00–09:00</div><div><h4>🌅 起床＋早餐</h4><p>建議不要吃太油，準備水與防曬。</p></div></div>
+      <div class="item"><div class="time">09:00–09:45</div><div><h4>🚇 尖沙咀 → 海洋公園</h4><p>尖沙咀站 → 金鐘站 → 南港島線 → 海洋公園站；約40–45分鐘。</p><a class="map-btn" href="https://www.google.com/maps/dir/?api=1&origin=Tsim+Sha+Tsui+Station&destination=Ocean+Park+Hong+Kong&travelmode=transit">🗺️ 開啟導航</a></div></div>
+      <div class="item"><div class="time">09:45–10:00</div><div><h4>🎟️ 入園準備</h4><p>實際開園時間以10月當日官方公告為準。</p><a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=Ocean+Park+Hong+Kong">🗺️ 海洋公園</a></div></div>
+      <div class="item"><div class="time">10:00–12:30</div><div><h4>🐼 海濱樂園</h4><p>動物展區、熊貓、海洋生物與拍照。</p></div></div>
+      <div class="item"><div class="time">12:30–13:30</div><div><h4>🍜 園內午餐</h4><p>預算約 HK$80–130／人。</p></div></div>
+      <div class="item"><div class="time">13:30–14:00</div><div><h4>🚠 搭海洋公園登山纜車</h4><p>Waterfront ↔ Summit；搭乘海洋公園園內纜車即可。</p></div></div>
+      <div class="item"><div class="time">14:00–17:30</div><div><h4>🎢 高峰樂園</h4><p>遊樂設施、山上景觀、動物展區；依現場排隊調整。</p></div></div>
+      <div class="item"><div class="time">17:30–18:30</div><div><h4>🎃 萬聖節／最後遊玩</h4><p>若當日有 Halloween 活動，以官方節目表為準。</p></div></div>
+      <div class="item"><div class="time">18:30–21:00</div><div><h4>🚇 回尖沙咀＋晚餐</h4><p>回住宿附近吃晚餐，約21:00回飯店。</p></div></div>
+    </div>
+  </article>
+
+  <article class="day-card">
+    <div class="day-head"><div class="date">10/14 WED · DAY 3</div><h3>🍵 上環 → 中環 → 太平山</h3><p>蓮香樓／兆成行／一樂燒鵝／Peak Tram</p></div>
+    <div class="timeline">
+      <div class="item"><div class="time">07:30–08:00</div><div><h4>🌅 起床</h4><p>今天行程較滿，建議早起。</p></div></div>
+      <div class="item"><div class="time">08:00–08:30</div><div><h4>🚇 尖沙咀 → 上環</h4><p>荃灣線往中環，再步行至蓮香樓；約25–30分鐘。</p></div></div>
+      <div class="item"><div class="time">08:30–09:45</div><div><h4>🍵 蓮香樓</h4><p>新址：中環威靈頓街160號。早茶／點心。</p><a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=Lin+Heung+Tea+House+160+Wellington+Street+Hong+Kong">🗺️ 蓮香樓</a></div></div>
+      <div class="item"><div class="time">10:00–11:00</div><div><h4>🧴 兆成行</h4><p>上環蘇杭街130號華熙樓；香薰／精油等。</p><a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=%E5%85%86%E6%88%90%E8%A1%8C+%E4%B8%8A%E7%92%B0%E8%98%87%E6%9D%AD%E8%A1%97130%E8%99%9F">🗺️ 兆成行</a></div></div>
+      <div class="item"><div class="time">11:00–11:30</div><div><h4>🚶 上環 → 中環</h4><p>以步行為主，沿途看街景。</p></div></div>
+      <div class="item"><div class="time">11:30–12:30</div><div><h4>🦆 一樂燒鵝</h4><p>中環士丹利街34–38號 G/F；兩人分食燒鵝＋白飯＋青菜。</p><a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=%E4%B8%80%E6%A8%82%E7%87%92%E9%B5%9D+34-38+Stanley+Street+Hong+Kong">🗺️ 一樂燒鵝</a></div></div>
+      <div class="item"><div class="time">12:30–15:30</div><div><h4>🏙️ 中環自由活動</h4><p>中環街市／半山手扶梯／石板街／咖啡廳，累了就休息。</p></div></div>
+      <div class="item"><div class="time">15:30–16:00</div><div><h4>🚶 前往 Peak Tram</h4><p>山頂纜車中環總站：花園道33號。</p><a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=Peak+Tram+Lower+Terminus+33+Garden+Road+Hong+Kong">🗺️ Peak Tram</a></div></div>
+      <div class="item"><div class="time">16:00–16:30</div><div><h4>🚋 山頂纜車上山</h4><p>建議買往返；實際票價以10月官方為準。</p></div></div>
+      <div class="item"><div class="time">16:30–19:00</div><div><h4>🌃 太平山夜景</h4><p>先拍照、等天色變暗，再看夜景；天氣不好時依現場狀況調整。</p><a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=Victoria+Peak+Hong+Kong">🗺️ 太平山</a></div></div>
+      <div class="item"><div class="time">19:00–21:45</div><div><h4>🚋 下山＋晚餐＋回飯店</h4><p>中環或尖沙咀吃晚餐。</p></div></div>
+    </div>
+  </article>
+
+  <article class="day-card">
+    <div class="day-head"><div class="date">10/15 THU · DAY 4</div><h3>🛒 惠康 → 尖沙咀 → 分流去機場</h3><p>怡婷16:35｜斯涵18:15</p></div>
+    <div class="timeline">
+      <div class="item"><div class="time">08:00–09:30</div><div><h4>🌅 起床＋早餐＋整理行李</h4></div></div>
+      <div class="item"><div class="time">09:30–10:00</div><div><h4>🧳 Check-out＋寄放行李</h4><p>先把行李寄放住宿，輕裝最後逛街。</p></div></div>
+      <div class="item"><div class="time">10:00–11:00</div><div><h4>🛒 惠康</h4><p>推薦金巴利道53–54號店，離住宿近。</p><a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=Wellcome+Supermarket+53-54+Kimberley+Road+Hong+Kong">🗺️ 惠康</a></div></div>
+      <div class="item"><div class="time">11:00–12:30</div><div><h4>🛍️ 尖沙咀最後採買</h4><p>The ONE／海港城／附近商店；不要跑遠。</p></div></div>
+      <div class="item"><div class="time">12:30–13:30</div><div><h4>🍜 最後午餐</h4><p>尖沙咀就近吃。</p></div></div>
+      <div class="item"><div class="time">13:30–14:00</div><div><h4>🧳 回住宿拿行李</h4><p>之後兩人依航班時間分流。</p></div></div>
+      <div class="item"><div class="time">14:00</div><div><h4>✈️ 怡婷出發去機場</h4><p>建議往九龍站轉 Airport Express；16:35起飛。</p><a class="map-btn" href="https://www.google.com/maps/dir/?api=1&origin=53-55+Haiphong+Road+Hong+Kong&destination=Hong+Kong+International+Airport&travelmode=transit">🗺️ 前往機場</a></div></div>
+      <div class="item"><div class="time">14:00–15:00</div><div><h4>☕ 斯涵：尖沙咀最後休息</h4><p>怡婷離開後，可喝咖啡或最後採買。</p></div></div>
+      <div class="item"><div class="time">15:00–15:30</div><div><h4>🧳 斯涵：拿行李</h4><p>準備前往機場。</p></div></div>
+      <div class="item"><div class="time">15:30左右</div><div><h4>✈️ 斯涵出發去機場</h4><p>18:15起飛，目標約16:30抵達機場。</p><a class="map-btn" href="https://www.google.com/maps/dir/?api=1&origin=53-55+Haiphong+Road+Hong+Kong&destination=Hong+Kong+International+Airport&travelmode=transit">🗺️ 前往機場</a></div></div>
+    </div>
+  </article>
+</section>
+
+<section class="section" id="transport">
+  <div class="section-title"><h2>🚇 交通</h2><small>預估費用</small></div>
+  <div class="card card-pad">
+    <div class="route"><div class="route-icon">🚌</div><div><b>機場 → 尖沙咀</b><span>A21｜約50–60分鐘｜約 HK$34.6／人</span></div></div>
+    <div class="route"><div class="route-icon">🚇</div><div><b>尖沙咀 → 佐敦</b><span>MTR 1站｜約3分鐘車程，含步行抓15–20分鐘</span></div></div>
+    <div class="route"><div class="route-icon">🚇</div><div><b>尖沙咀 → 海洋公園</b><span>尖沙咀 → 金鐘 → 南港島線 → 海洋公園｜約40–45分鐘</span></div></div>
+    <div class="route"><div class="route-icon">🚇</div><div><b>尖沙咀 → 上環</b><span>荃灣線往中環＋步行｜約25–30分鐘</span></div></div>
+    <div class="route"><div class="route-icon">🚋</div><div><b>Peak Tram</b><span>花園道33號 ↔ 太平山｜往返票價以10月官方為準</span></div></div>
+    <div class="route"><div class="route-icon">🚄</div><div><b>九龍站 → 香港機場</b><span>Airport Express｜約22分鐘｜成人單程目前約 HK$105</span></div></div>
+  </div>
+</section>
+
+<section class="section" id="stay">
+  <div class="section-title"><h2>🏨 住宿</h2></div>
+  <div class="card card-pad">
+    <h3 style="margin-top:0">香港雅舍（尖沙咀）</h3>
+    <div class="info-row"><span class="label">地址</span>香港九龍油尖旺區海防道53–55號，海防大廈5樓506室</div>
+    <div class="info-row"><span class="label">區域</span>尖沙咀</div>
+    <div class="info-row"><span class="label">入住／退房</span>依住宿訂單為準；預計14:30後入住、12:00前退房</div>
+    <div class="info-row"><span class="label">特色</span>靠近尖沙咀站、The ONE、廟街、惠康等</div>
+    <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=Joyce+House+53-55+Haiphong+Road+Hong+Kong">🗺️ 導航到住宿</a>
+  </div>
+</section>
+
+<section class="section" id="packing">
+  <div class="section-title"><h2>🎒 行前準備／行李</h2><small>可勾選</small></div>
+  <div class="card card-pad">
+    <ul class="checklist">
+      <li><input type="checkbox"> 護照</li>
+      <li><input type="checkbox"> 台灣居民預辦入境登記通知書（手機＋紙本）</li>
+      <li><input type="checkbox"> 回程機票／住宿訂單</li>
+      <li><input type="checkbox"> 旅平險保單</li>
+      <li><input type="checkbox"> 信用卡＋少量港幣現金</li>
+      <li><input type="checkbox"> eSIM／網路方案</li>
+      <li><input type="checkbox"> 八達通</li>
+      <li><input type="checkbox"> 英式三腳轉接頭</li>
+      <li><input type="checkbox"> 行動電源＋充電線</li>
+      <li><input type="checkbox"> 好走的鞋</li>
+      <li><input type="checkbox"> 短袖衣物＋薄外套</li>
+      <li><input type="checkbox"> 摺疊傘／防曬／帽子</li>
+      <li><input type="checkbox"> 個人藥品＋腸胃藥／止痛藥／OK繃</li>
+      <li><input type="checkbox"> 衛生紙／濕紙巾</li>
+    </ul>
+  </div>
+  <div class="card card-pad">
+    <h3 style="margin-top:0">📱 網路與支付</h3>
+    <p style="margin:6px 0;font-size:14px">建議每人一張 eSIM；4天可抓5–10GB以上。信用卡為主，搭配少量現金。八達通適合MTR、巴士及小額消費。</p>
+  </div>
+</section>
+
+<section class="section" id="budget">
+  <div class="section-title"><h2>💰 預算</h2><small>2人合計</small></div>
+  <div class="grid2">
+    <div class="budget"><small>10/12</small><b>HK$250–400</b></div>
+    <div class="budget"><small>10/13</small><b>HK$495–825</b></div>
+    <div class="budget"><small>10/14</small><b>HK$780–1,225</b></div>
+    <div class="budget"><small>10/15</small><b>HK$300–500</b></div>
+  </div>
+  <div class="total"><span>4天基本吃喝＋交通預估，不含住宿／機票／購物／海洋公園門票</span><b>HK$1,825–2,950</b><span>約 NT$7,500–12,100／2人（以 HK$1 ≈ NT$4.1 粗估）</span></div>
+  <div class="card card-pad" style="margin-top:14px">
+    <div class="info-row"><span class="label">另外預留</span>海洋公園門票、Peak Tram／Sky Terrace、兆成行、大生、惠康及伴手禮</div>
+    <div class="info-row"><span class="label">現金</span>建議每人先準備 HK$500–1,000，其餘信用卡／電子支付</div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-title"><h2>📌 行前提醒</h2></div>
+  <div class="card card-pad">
+    <p style="margin-top:0">🇭🇰 <b>台灣居民入境</b><br>出發前確認台灣居民預辦入境登記仍有效，並確認姓名、護照資料一致。</p>
+    <p>🌦️ <b>10月香港</b><br>仍偏暖濕，短袖為主＋薄外套；太平山與戶外景點準備雨具。</p>
+    <p>🎢 <b>海洋公園</b><br>10/13當日開園時間、Halloween活動、表演與設施狀況，出發前再看官方公告。</p>
+    <p>🌃 <b>太平山</b><br>若遇惡劣天氣，夜景視野可能受影響；當天再決定是否上山。</p>
+    <p style="margin-bottom:0">🧳 <b>行程提醒</b><br>本次不安排昂坪360，保留更多時間給海洋公園、香港島與太平山。</p>
+  </div>
+</section>
+</main>
+
+<nav class="bottom-nav">
+  <button class="nav-btn active" data-target="days"><span class="ico">📅</span>每日行程</button>
+  <button class="nav-btn" data-target="transport"><span class="ico">🚇</span>交通</button>
+  <button class="nav-btn" data-target="stay"><span class="ico">🏨</span>住宿</button>
+  <button class="nav-btn" data-target="packing"><span class="ico">🎒</span>行李</button>
+  <button class="nav-btn" data-target="budget"><span class="ico">💰</span>預算</button>
+</nav>
+<button class="backtop" id="backtop" aria-label="回到頂部">↑</button>
+
+<script>
+const nav=document.querySelectorAll('.nav-btn');
+nav.forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.getElementById(btn.dataset.target).scrollIntoView({behavior:'smooth',block:'start'});
+    nav.forEach(b=>b.classList.remove('active')); btn.classList.add('active');
+  });
+});
+const sections=[...document.querySelectorAll('.section')];
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      nav.forEach(b=>b.classList.toggle('active',b.dataset.target===e.target.id));
+    }
+  });
+},{rootMargin:'-25% 0px -65% 0px'});
+sections.forEach(s=>observer.observe(s));
+const topBtn=document.getElementById('backtop');
+window.addEventListener('scroll',()=>{topBtn.style.display=scrollY>500?'block':'none'});
+topBtn.onclick=()=>scrollTo({top:0,behavior:'smooth'});
+</script>
+</body>
+</html>
